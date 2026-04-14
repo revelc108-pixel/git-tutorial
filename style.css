@@ -95,7 +95,7 @@ body {
   border: none;
   border-radius: var(--radius);
   background: linear-gradient(135deg, var(--primary), #7c6cf0);
-  color: white;
+  color: rgb(250, 26, 26);
   cursor: pointer;
   display: flex;
   align-items: center;
