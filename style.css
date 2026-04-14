@@ -1,0 +1,347 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6c5ce7;
+  --primary-light: #a29bfe;
+  --danger: #fd79a8;
+  --bg: #f8f9fe;
+  --card: #ffffff;
+  --text: #2d3436;
+  --text-secondary: #a0a4b8;
+  --border: #eef0f8;
+  --shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
+  --shadow-hover: 0 12px 40px rgba(108, 92, 231, 0.14);
+  --radius: 16px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 80px;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(108, 92, 231, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(253, 121, 168, 0.06) 0%, transparent 50%);
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--danger));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Input Area */
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-area input:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+.input-area input::placeholder {
+  color: var(--text-secondary);
+}
+
+#addBtn {
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), #7c6cf0);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+#addBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.35);
+}
+
+#addBtn:active {
+  transform: scale(0.97);
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+/* Todo List */
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  animation: slideIn 0.3s ease;
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+.todo-item.removing {
+  animation: slideOut 0.25s ease forwards;
+}
+
+/* Custom Checkbox */
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.checkbox:hover {
+  border-color: var(--primary-light);
+}
+
+.todo-item.completed .checkbox {
+  background: linear-gradient(135deg, var(--primary), var(--danger));
+  border-color: transparent;
+}
+
+.checkbox svg {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.todo-item.completed .checkbox svg {
+  opacity: 1;
+}
+
+/* Todo Text */
+.todo-text {
+  flex: 1;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  transition: var(--transition);
+  word-break: break-word;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Delete Button */
+.delete-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.todo-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: rgba(253, 121, 168, 0.1);
+  color: var(--danger);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 14px 4px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.footer.hidden {
+  display: none;
+}
+
+.clear-btn {
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.clear-btn:hover {
+  background: rgba(253, 121, 168, 0.1);
+  color: var(--danger);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px;
+  color: var(--text-secondary);
+  gap: 12px;
+}
+
+.empty-state.hidden {
+  display: none;
+}
+
+.empty-state svg {
+  opacity: 0.25;
+}
+
+.empty-state p {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.empty-hint {
+  font-size: 0.88rem !important;
+  font-weight: 400 !important;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  body {
+    padding: 24px 12px 60px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .todo-item {
+    padding: 14px 14px;
+  }
+
+  .todo-item .delete-btn {
+    opacity: 0.6;
+  }
+}
